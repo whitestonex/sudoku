@@ -1,0 +1,1 @@
+The project want to automatic fill the sudoku, the input is data.txt which has 9x9 table.
