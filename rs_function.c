@@ -150,3 +150,33 @@ void rsPrintSudoku(void)
 #endif
 
 }
+
+
+
+
+
+void rsResolve(void)
+{
+    int i,iFlag,iLevel;
+
+    iLevel = 1;
+
+    while (iLevel<= 9)
+    {
+        iFlag = 0;
+        for (i = 0; i < 27; i++)
+        {
+            iFlag += function_1(i, iLevel);
+        }
+
+        if (iFlag == 0)
+        {
+            iLevel++;
+        }
+        else
+        {
+            iLevel = 1;
+        }
+    }
+
+}
