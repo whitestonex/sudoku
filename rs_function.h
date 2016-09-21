@@ -7,5 +7,7 @@ int rsLoadData(char *pcDataFile);
 
 void rsPrintSudoku(void);
 
+void FUN1(void);
+void rsPrintdebug(void);
 
 #endif
