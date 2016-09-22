@@ -17,6 +17,15 @@ typedef struct oneButton
     int arrayPossibleValue[9];
 } strButton;
 
+typedef struct compareCollect
+{
+    int iCount;
+    int iPossibleType;
+    int arrayPosition[9];
+    int arrayPossibleValue[9];
+} strCompare;
+
+
 extern strButton sudokuBt[9][9];
 extern strButton *pCheckList[27][9];
 

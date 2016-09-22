@@ -176,17 +176,108 @@ int function_2(int iListIndex)
 
 
 
-int function_1(int iListIndex)
+int removeSame2(int iListIndex)
 {
-    int i,j,k;
-#if 0
+    int i,j,k,l;
+    int iDifferentTypeCount = 0;
+    int iMatchFlag = 0;
+    int iRemoveFlag = 0;
+    int iPossibleCount = 0;
+    strCompare X[9];
+
+if (iListIndex != 26)
+{
+    return 0;
+}
+
+    memset(X, 0x0, sizeof(X));
+
     for (i = 0; i < 9; i++)
     {
-        
+        if (pCheckList[iListIndex][i]->iPossibleCount == 2)
+        {
+            printf("%d possible count is 2\n",i);
+            iMatchFlag = 0;
+            for (j = 0; j <= iDifferentTypeCount; j++)
+            {
+                if (pCheckList[iListIndex][i]->iPossibleType == X[j].iPossibleType)
+                {
+                    X[j].arrayPosition[X[j].iCount] = i;
+                    X[j].iCount ++;
+                    iMatchFlag = 1;
+                    break;
+                }
+            }
+
+            if (iMatchFlag == 0)
+            {
+                X[iDifferentTypeCount].iPossibleType = pCheckList[iListIndex][i]->iPossibleType;
+                for (j = 0; j < 2; j++)
+                {
+                    X[iDifferentTypeCount].arrayPossibleValue[j] = pCheckList[iListIndex][i]->arrayPossibleValue[j];
+                }
+                iDifferentTypeCount++;
+            }
+        }
     }
+
+#if 0
+    int iCount;
+    int iPossibleType;
+    int arrayPosition[9];
+    int arrayPossibleValue[9];
 #endif
-    return 0;    
+
+printf("There are %d\n", iDifferentTypeCount);
+for (i = 0; i < iDifferentTypeCount; i++)
+{
+    printf("There are %d same for this type %d means %d and %d\n", X[i].iCount, X[i].iPossibleType, X[i].arrayPossibleValue[0],X[i].arrayPossibleValue[1]);
 }
+
+
+
+    for (i = 0; i < iDifferentTypeCount; i++)
+    {
+        if (X[i].iCount == 2)
+        {
+            for (j = 0; j < 9; j++)
+            {
+                if ((j != X[i].arrayPosition[0]) && (j != X[i].arrayPosition[1]))
+                {
+                    iPossibleCount = pCheckList[iListIndex][j]->iPossibleCount;
+printf("index %d have %d possible\n", j, iPossibleCount);                    
+                    for (k = 0; k < iPossibleCount; k++)
+                    {
+                        if ((pCheckList[iListIndex][j]->arrayPossibleValue[k] == X[i].arrayPossibleValue[0])||(pCheckList[iListIndex][j]->arrayPossibleValue[k] == X[i].arrayPossibleValue[1]))
+                        {
+                            pCheckList[iListIndex][j]->arrayPossibleValue[k] = 0;
+                            pCheckList[iListIndex][j]->iPossibleCount --;
+                            pCheckList[iListIndex][j]->iPossibleType -= (1<<pCheckList[iListIndex][j]->arrayPossibleValue[k]);
+                            iRemoveFlag = 1;
+                        }
+                    }
+
+                    if (iRemoveFlag == 1)
+                    {
+                        for (k = 0,l = 0; k < iPossibleCount; k++)
+                        {
+                            if (pCheckList[iListIndex][j]->arrayPossibleValue[k] != 0)
+                            {
+                                pCheckList[iListIndex][j]->arrayPossibleValue[l] = pCheckList[iListIndex][j]->arrayPossibleValue[k];
+                                l++; 
+                            }
+                        }
+                    }
+                } 
+            }
+        }
+    }
+
+    return iRemoveFlag;
+}
+
+
+
 
 int preHandleList(int iListIndex)
 {
@@ -222,6 +313,9 @@ int preHandleList(int iListIndex)
             }
         }
     }
+
+
+    iGetFlag += removeSame2(iListIndex);
 
     for (i = 0; i < 9; i++)
     {
