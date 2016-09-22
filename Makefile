@@ -17,7 +17,7 @@ PROJ_OBJS := $(filter %.o, $(patsubst %.c,%.o,$(PROJ_SRCS)) $(patsubst %.cpp,%.o
 PROJ_DEPS :=$(filter %.d, $(patsubst %.c,%.d,$(PROJ_SRCS)) $(patsubst %.cpp,%.d,$(PROJ_SRCS)))	
 
 $(RESOLV_SUDOKU):  $(PROJ_OBJS)
-	@${CC} $(PROJ_CFLAGS) -Wl,--start-group $(PROJ_OBJS) -Wl,--end-group -o $@
+	@${CC} $(PROJ_CFLAGS) $(PROJ_OBJS) -o $@
 
 %.o: %.c
 	@echo "Compiling:" $<...
