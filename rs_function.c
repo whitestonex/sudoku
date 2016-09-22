@@ -184,19 +184,19 @@ int removeSame2(int iListIndex)
     int iRemoveFlag = 0;
     int iPossibleCount = 0;
     strCompare X[9];
-
+#if 0
 if (iListIndex != 26)
 {
     return 0;
 }
-
+#endif
     memset(X, 0x0, sizeof(X));
 
     for (i = 0; i < 9; i++)
     {
         if (pCheckList[iListIndex][i]->iPossibleCount == 2)
         {
-            printf("%d possible count is 2 and iDifferentTypeCount is %d\n",i,iDifferentTypeCount);
+//            printf("%d possible count is 2 and iDifferentTypeCount is %d\n",i,iDifferentTypeCount);
             iMatchFlag = 0;
             for (j = 0; j < iDifferentTypeCount+1; j++)
             {
@@ -212,6 +212,7 @@ if (iListIndex != 26)
             if (iMatchFlag == 0)
             {
                 X[iDifferentTypeCount].iPossibleType = pCheckList[iListIndex][i]->iPossibleType;
+                X[iDifferentTypeCount].iCount = 1;
                 for (j = 0; j < 2; j++)
                 {
                     X[iDifferentTypeCount].arrayPossibleValue[j] = pCheckList[iListIndex][i]->arrayPossibleValue[j];
@@ -227,13 +228,13 @@ if (iListIndex != 26)
     int arrayPosition[9];
     int arrayPossibleValue[9];
 #endif
-
+#if 0
 printf("There are %d\n", iDifferentTypeCount);
 for (i = 0; i < iDifferentTypeCount; i++)
 {
     printf("There are %d same for this type %d means %d and %d\n", X[i].iCount, X[i].iPossibleType, X[i].arrayPossibleValue[0],X[i].arrayPossibleValue[1]);
 }
-
+#endif
 
 
     for (i = 0; i < iDifferentTypeCount; i++)
@@ -245,7 +246,7 @@ for (i = 0; i < iDifferentTypeCount; i++)
                 if ((j != X[i].arrayPosition[0]) && (j != X[i].arrayPosition[1]))
                 {
                     iPossibleCount = pCheckList[iListIndex][j]->iPossibleCount;
-printf("index %d have %d possible\n", j, iPossibleCount);                    
+//printf("index %d have %d possible\n", j, iPossibleCount);                    
                     for (k = 0; k < iPossibleCount; k++)
                     {
                         if ((pCheckList[iListIndex][j]->arrayPossibleValue[k] == X[i].arrayPossibleValue[0])||(pCheckList[iListIndex][j]->arrayPossibleValue[k] == X[i].arrayPossibleValue[1]))
