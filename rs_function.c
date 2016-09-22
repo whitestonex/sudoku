@@ -196,9 +196,9 @@ if (iListIndex != 26)
     {
         if (pCheckList[iListIndex][i]->iPossibleCount == 2)
         {
-            printf("%d possible count is 2\n",i);
+            printf("%d possible count is 2 and iDifferentTypeCount is %d\n",i,iDifferentTypeCount);
             iMatchFlag = 0;
-            for (j = 0; j <= iDifferentTypeCount; j++)
+            for (j = 0; j < iDifferentTypeCount+1; j++)
             {
                 if (pCheckList[iListIndex][i]->iPossibleType == X[j].iPossibleType)
                 {
